@@ -1,0 +1,23 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets (Mobile)\Scripts\static_vars.js">
+    <Files>
+      <File FileName="Assets\Standard Assets (Mobile)\Scripts\static_vars.js" Line="92" Column="50" />
+      <File FileName="Assets\Standard Assets (Mobile)\Scripts\SwitchCamera.js" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets (Mobile)\Scripts\Menu.js" Line="17" Column="22" />
+      <File FileName="Assets\Standard Assets (Mobile)\Scripts\Ball.js" Line="18" Column="36" />
+      <File FileName="Assets\orientation.js" Line="9" Column="1" />
+      <File FileName="Assets\musica.js" Line="12" Column="19" />
+      <File FileName="Assets\Standard Assets (Mobile)\Scripts\GameScore.js" Line="8" Column="1" />
+      <File FileName="Assets\pauseMenu.js" Line="63" Column="23" />
+      <File FileName="Assets\Standard Assets (Mobile)\Scripts\timer.js" Line="27" Column="47" />
+      <File FileName="Assets\Standard Assets (Mobile)\Scripts\goodBricks.js" Line="3" Column="36" />
+      <File FileName="Assets\Standard Assets (Mobile)\Scripts\badBricks.js" Line="28" Column="37" />
+      <File FileName="Assets\Standard Assets (Mobile)\Scripts\ChooseLevel.js" Line="17" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
