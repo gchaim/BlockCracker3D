@@ -1,5 +1,7 @@
 ﻿#pragma strict
 
+/* control the behaviour of "good" bricks in the game */
+
 var staticVarsScript : static_vars;
 
 var guiWin : GUIText;
@@ -12,6 +14,7 @@ function Start () {
 	guiWin.text = "";
 }
 
+// collision between the ball and a good brick
 function OnCollisionEnter(collision : Collision){
 
 	AudioSource.PlayClipAtPoint(audioGoodBrickCollision, transform.position);
@@ -20,14 +23,10 @@ function OnCollisionEnter(collision : Collision){
 	Destroy(this.gameObject);
 	
 	staticVarsScript.updateScore(10);
-		
+	
+	// check if it's the last one and the player wins
 	staticVarsScript.numOfGoodBricks-=1;
 	if(staticVarsScript.numOfGoodBricks==0){
 		staticVarsScript.Win();
 	}
-}
-
-function helper(){
-	print("YOU WIN");
-	staticVarsScript.GameOver();
 }

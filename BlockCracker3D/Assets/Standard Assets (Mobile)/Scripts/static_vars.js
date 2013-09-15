@@ -1,5 +1,7 @@
 ﻿#pragma strict
 
+/* handles all static data and functions of the game */
+
 var guiScore : GUIText;
 var cameraMode : boolean = false;
 var numOfLives : int = 3;
@@ -27,9 +29,11 @@ var sign1 : GameObject;
 var sign2 : GameObject;
 var tempPlane : GameObject;
 
+var gameWon : boolean = false;
+
 
 function Awake () {
-		
+	
 	endLevelMenuWindow = new Rect(Screen.width / 2 - 200 , Screen.height / 2 - 200, 400 , 312);
 
 	gameScore = GameObject.Find("scoreControl").GetComponent("GameScore");
@@ -43,6 +47,7 @@ function Start(){
 	Invoke("destroyHelpSigns",10);
 }
 
+// removes the helper messages that appear in the beggining of each level
 function destroyHelpSigns(){
 	Destroy(sign1);
 	Destroy(sign2);
@@ -50,7 +55,7 @@ function destroyHelpSigns(){
 }
 
 function OnGUI() {
-
+	// switch button for debbuging
 	if(inputControl.mouseMode){
 		if (GUI.Button(Rect(160,10,170,80),"switch")){	
 			cameraMode = !cameraMode;
@@ -62,15 +67,17 @@ function OnGUI() {
 	}
 }
 
+// end level menu options
 function endLevelMenuFunc(id : int){
 
 	var buttonHeight = 88;
 	
 	GUI.skin = buttonSkin;
 		
-	if (!lastLevel){
+	if (!lastLevel && gameWon){
 		if(GUILayout.Button("Next Level", GUILayout.Height(buttonHeight))){
 			AudioSource.PlayClipAtPoint(audioClick, transform.position);
+			gameWon = false;
 			Application.LoadLevel("Level2");
 		}
 	}
@@ -82,15 +89,21 @@ function endLevelMenuFunc(id : int){
 		gameScore = GameObject.Find("scoreControl").GetComponent("GameScore");
 		gameScore.score = 0;
 		
+		gameWon = false;
+		
 		Application.LoadLevel(Application.loadedLevel);
 	}
 	
 	if(GUILayout.Button("Main Menu",GUILayout.Height(buttonHeight))){
 		AudioSource.PlayClipAtPoint(audioClick, transform.position);
+		
+		gameWon = false;
+		
 		Application.LoadLevel("MainMenu");
 	}
 }
 
+// check if highscore should be updated
 function saveHighScore(){
 
 	if(gameScore.score > PlayerPrefs.GetInt("highScore")){
@@ -98,11 +111,8 @@ function saveHighScore(){
 	}
 }
 
-function GameOver(){
-
-	Application.LoadLevel("MainMenu");
-}
-
+// updates the variable which saves the highest
+// level reached by the user, if needed
 function UpdateMaxLevelReached(){
 	
 	var oldMaxLevelReached = PlayerPrefs.GetInt("maxLevelReached");
@@ -113,6 +123,7 @@ function UpdateMaxLevelReached(){
 	}
 }
 
+// handles winning the game
 function Win(){
 
 	UpdateMaxLevelReached();
@@ -123,13 +134,17 @@ function Win(){
 	guiWin.fontSize = Screen.width/6;
 	
 	levelEnded = true;
+	gameWon = true;
+	
 	Invoke("EndLevel", 3);
 }
 
+// ends the level
 function EndLevel(){
 	displayEndLevelMenu = true;
 }
 
+// handles game lose
 function loose(looseMessage : String){
 
 	saveHighScore();
@@ -140,12 +155,12 @@ function loose(looseMessage : String){
 	guiWin.color = Color.red;
 	
 	levelEnded = true;
-	Invoke("GameOver", 3);
+	
+	Invoke("EndLevel", 3);
 
 }
 
-
-
+// sets the light back to its normal state
 function backToNormalLight(){
 	
 	pointLight.color = Color.white;
@@ -153,6 +168,7 @@ function backToNormalLight(){
 
 }
 
+// displays red light to indicate ball hit a "bad brick"
 function damage(){
 	
 	pointLight.intensity = pointLight.intensity*2;
@@ -161,13 +177,14 @@ function damage(){
 	Invoke("backToNormalLight", 0.3f);
 }
 
+// updates the game score
 function updateScore(diff : int){
 
 	gameScore.score +=diff;
 	guiScore.text = "Score: " + gameScore.score;
 }
 
-
+// reduces a life and checks if the player is dead
 function reduceLife(){
 	
 	numOfLives-=1;

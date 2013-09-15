@@ -1,5 +1,7 @@
 ﻿#pragma strict
 
+/* manages the fourth instruction scene */
+
 var previousLevel : String = "Instructions3";
 var skin : GUISkin;
 var audioClick : AudioClip;
@@ -16,11 +18,12 @@ function OnGUI() {
 		skin.button.fontSize = buttonWidth/4;
 		GUI.skin = skin;
 
+		// back button
 		if (GUI.Button(Rect(rightButtonCornerX , buttonsCornerY, buttonWidth, buttonHeight),"Back")){	
 			AudioSource.PlayClipAtPoint(audioClick, transform.position);
 			Application.LoadLevel(previousLevel);
 		}
-		
+		// next button
 		if (GUI.Button(Rect(leftButtonCornerX , buttonsCornerY, buttonWidth, buttonHeight),"Main Menu")){	
 			AudioSource.PlayClipAtPoint(audioClick, transform.position);
 			Application.LoadLevel("MainMenu");

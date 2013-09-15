@@ -1,5 +1,7 @@
 ﻿#pragma strict
 
+/* manage the scene of choosing the level to play */
+
 private var ray : Ray;
 private var hit : RaycastHit;
 
@@ -9,6 +11,8 @@ var x : GameObject[];
 var maxLevelReached : int;
 
 function Awake(){
+	// remembers the highest level reached by the player in order to
+	// let the player choose only the levels he opened
 	maxLevelReached = PlayerPrefs.GetInt("maxLevelReached");
 	
 	if(maxLevelReached == 0){
@@ -22,6 +26,7 @@ function Update(){
 
 	openUnlockedLevels();
 	
+	// captures the player choise 
 	if(Input.GetMouseButtonUp(0)){
 		ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 		if(Physics.Raycast(ray, hit)){
@@ -32,7 +37,6 @@ function Update(){
 				Application.LoadLevel("Level1");
 			}
 			if((hit.transform.name == "level2") && maxLevelReached>=2 ){
-				print("Amit Rephael");
 				Application.LoadLevel("Level2");
 			}
 			if(hit.transform.name == "Cube"){
@@ -42,6 +46,7 @@ function Update(){
 	}
 }
 
+// check if new levels need to be opened
 function openUnlockedLevels(){
 
 	for (var i:int=0 ; i<maxLevelReached-1 && i<x.length; i++){

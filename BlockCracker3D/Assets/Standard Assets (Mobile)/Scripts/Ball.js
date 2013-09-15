@@ -1,5 +1,7 @@
 ﻿#pragma strict
 
+/* control the behaviour of the ball in the game */
+
 final var EPSILON: float = 1; 
 
 var regTexture : Material;
@@ -38,7 +40,8 @@ function OnGUI() {
 	GUI.skin = mySkin1;
 	
 	var marginWidth = (Screen.width-Screen.height)/2;
-		
+	
+	// fire button
 	if (GUI.Button(Rect(marginWidth/4,Screen.height/6, marginWidth/2, marginWidth/2),"")){
 		if(!staticVarsScript.levelEnded){
 			rigidbody.velocity = ball.transform.up*5;
@@ -62,7 +65,7 @@ function Update(){
 
 }
 
-// mouse update
+// mouse move update
 function MouseUpdate () {
 
 	if(!staticVarsScript.cameraMode){
@@ -81,6 +84,7 @@ function MouseUpdate () {
 	}
 }
 
+// rotate ball with mouse movements
 function HandleMouseRotation(){
 	var easeFactor = 15f;
 	
@@ -126,6 +130,7 @@ function TouchUpdate () {
 
 }
 
+// rotate ball with touches
 function HandleTouchRotation(){
 	var easeFactor = 25f;
 	
@@ -137,7 +142,7 @@ function HandleTouchRotation(){
 				
 }
 
-
+// start "god mode"
 function GodMode(){
 	bonusCounter++;
 	godMode = true;
@@ -145,6 +150,7 @@ function GodMode(){
 	Invoke("EndGodMode",30);
 }
 
+// end "god mode"
 function EndGodMode(){
 	bonusCounter--;
 	if (bonusCounter==0){

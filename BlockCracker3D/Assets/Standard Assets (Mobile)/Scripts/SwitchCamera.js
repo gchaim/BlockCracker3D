@@ -1,5 +1,7 @@
 ﻿#pragma strict
 
+/* manage the abilty to rotate the camera around the level */
+
 var cameraController : GameObject;
 var mainCamera : GameObject;
 
@@ -24,9 +26,7 @@ var verticalRotationMax : float = 65f;
 
 var easeFactor = 10f;
 
-var arrow : GameObject;
-
-
+// choose between mouse and touch control
 function Update(){
 	if(staticVarsScript.inputControl.mouseMode){
 		MouseUpdate();
@@ -57,7 +57,7 @@ function MouseUpdate () {
 	}
 }
 
-
+// handle rotation of the camera according to the mouse movements
 function HandleMouseRotation(){
 	var easeFactor = 10f;
 

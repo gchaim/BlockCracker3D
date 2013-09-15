@@ -1,20 +1,18 @@
 ﻿#pragma strict
 
+/* manage the pause menue inside the levels */
+
 var windowRect : Rect;
 var paused : boolean = false;
 var pauseSkin : GUISkin; 
 var button : GUISkin;
 var wall : GameObject;
-var sign1 : GameObject;
-var sign2 : GameObject;
-var tempPlane : GameObject;
 var audioClick : AudioClip;
 var gameScore : GameScore;
 
 
 function Start () {
 	windowRect = new Rect(Screen.width / 2 - 200 , Screen.height / 2 - 200, 400 , 312);
-	
 }
 
 function OnGUI(){
@@ -22,7 +20,7 @@ function OnGUI(){
 	GUI.skin = pauseSkin;
 	
 	var marginWidth = (Screen.width-Screen.height)/2;
-	
+	// open pause menue button
 	if (GUI.Button(Rect(Screen.height+1.25*marginWidth,Screen.height/6, marginWidth/2, marginWidth/2),"")){
 		paused=true;
 		Time.timeScale = 0;
@@ -33,7 +31,7 @@ function OnGUI(){
 	}
 }
 
-
+// handle the menu options
 function windowFunc(id : int){
 
 	GUI.skin = button;
@@ -56,6 +54,7 @@ function windowFunc(id : int){
 	}
 }
 
+// resume the game and close the pause menu
 function Resume(){
 
 	paused = false;

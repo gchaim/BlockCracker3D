@@ -1,5 +1,7 @@
 ﻿#pragma strict
 
+/* control the timer of the level */
+
 private var startTime : float;
 var textTime : String;
 private var restSeconds : int;
@@ -23,6 +25,7 @@ function OnGUI () {
    var guiTime = Time.time - startTime;
    GUI.skin = timerSkin;
   
+  	// updates the time
    if(!timeOut && !staticVarsScript.levelEnded){
    		 restSeconds = countDownSeconds - (guiTime);
     }
@@ -31,10 +34,10 @@ function OnGUI () {
    		staticVarsScript.loose("TIME'S UP");
    		timeOut = true;
     }
- 
+ 	
+ 	// show time in regular format
    var minutes : int = restSeconds / 60;
    var seconds : int = restSeconds % 60;
- 
    textTime = String.Format ("{0:00}:{1:00}", minutes, seconds);
    
    var marginWidth = (Screen.width-Screen.height)/2;

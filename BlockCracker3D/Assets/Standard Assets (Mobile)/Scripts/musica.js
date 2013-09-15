@@ -1,5 +1,7 @@
 ﻿#pragma strict
 
+/* handle the background music in the game */
+
 var listener : AudioListener;
 
 function Start(){
