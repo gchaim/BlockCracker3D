@@ -16,5 +16,5 @@ function helper(){
 }
 
 function Awake() {
-    DontDestroyOnLoad(this.gameObject);
+	 DontDestroyOnLoad(this.gameObject);
 }

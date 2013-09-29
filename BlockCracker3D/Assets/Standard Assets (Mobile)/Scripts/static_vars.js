@@ -3,6 +3,7 @@
 /* handles all static data and functions of the game */
 
 var guiScore : GUIText;
+var guiScoreShadow : GUIText;
 var cameraMode : boolean = false;
 var numOfLives : int = 3;
 var lives : GameObject[];
@@ -38,6 +39,7 @@ function Awake () {
 
 	gameScore = GameObject.Find("scoreControl").GetComponent("GameScore");
 	guiScore.text = "Score: " + gameScore.score;
+	guiScoreShadow.text = "Score: " + gameScore.score;
 	
 	inputControl = GameObject.Find("InputController").GetComponent("InputControl");
 
@@ -182,6 +184,7 @@ function updateScore(diff : int){
 
 	gameScore.score +=diff;
 	guiScore.text = "Score: " + gameScore.score;
+	guiScoreShadow.text = "Score: " + gameScore.score;
 }
 
 // reduces a life and checks if the player is dead

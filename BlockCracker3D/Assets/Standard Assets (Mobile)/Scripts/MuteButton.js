@@ -25,11 +25,28 @@ function setTexture(isMute : int){
 }
 
 function Awake () {
-	// remember the user choise from previous games
+	
 	listener = GameObject.Find("musicManager").GetComponent("AudioListener");
+	
+	// remember the user choise from previous games
 	setTexture(PlayerPrefs.GetInt("mute"));
 }
 
 function Start(){
 	DontDestroyOnLoad(this.gameObject);
+}
+
+
+function OnApplicationPause (pause : boolean)
+{
+   if(!pause){// application resumed
+   
+       // remember previous user choise of sound
+		var isMute = PlayerPrefs.GetInt("mute");
+	
+		setTexture(isMute);
+		if (isMute==1){
+			listener.pause = true;
+		}
+   }
 }
